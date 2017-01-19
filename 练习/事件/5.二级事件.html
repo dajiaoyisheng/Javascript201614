@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<script src="事件.js"></script>
+<script>
+    var oDiv=document.getElementById('div');
+    console.log(oDiv);
+    function f1(){console.log(1)}
+    function f2(){console.log(2)}
+    function f3(){console.log(3)}
+    function f4(){console.log(4)}
+    function f5(){console.log(5)}
+    function f6(){console.log(6)}
+    function f7(){console.log(7)}
+    function f8(){console.log(8)}
+    function f9(){console.log(9)}
+    function f10(){console.log(10)}
+    bind(oDiv,'click',f1);
+    bind(oDiv,'click',f2);
+    unbind(oDiv,'click',f2);
+
+</script>
+</body>
+</html>

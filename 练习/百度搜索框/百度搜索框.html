@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        img{
+            display:block;
+            width: 378px ;
+            height: 180px;
+            margin: 0 auto;
+        }
+        div{
+            width: 560px;
+            height: 40px;
+            margin: 40px auto;
+            position: relative;
+        }
+        input{
+            float: left;
+            display: block;
+            outline: none;
+            width: 450px;
+            height: 40px;
+            padding-left: 5px;
+            font-size: 18px;
+        }
+        span{
+            cursor: pointer;
+            float: left;
+            width: 100px;
+            height: 44px;
+            display: block;
+            background-color: #38f;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            font-size: 18px;
+        }
+        ul{
+            width: 458px;
+            height: 140px;
+            box-shadow: 0 0 2px #444;
+            position: absolute;
+            top: 44px;
+            left: 1px;
+            display: none;
+        }
+        li{
+            width: 453px;
+            height: 35px;
+            line-height: 35px;
+            padding-left: 5px;
+        }
+        li:hover{
+            background: #eee;
+        }
+        .on{
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+<img src="bd_logo1.png" alt=""/>
+<div id="box"><input type="text"/><span id="bd">百度一下</span>
+    <ul>
+        <li>渝漠爱大栋</li>
+        <li>好玩</li>
+        <li>记得练习之前的效果图</li>
+        <li>用各个方式</li>
+    </ul>
+</div>
+<script>
+    var oDiv=document.getElementById('box');
+    var inPut=document.getElementsByTagName('input')[0];
+    var bd=document.getElementById('bd');
+    var oUl=document.getElementsByTagName('ul')[0];
+    var aLi=document.getElementsByTagName('li');
+    var n=-1;
+    var oldValue=null;
+    inPut.onfocus=inPut.onkeyup=function(){
+        var val=inPut.value;
+        if(val.length){
+            oUl.style.display='block';
+        }else{
+            oUl.style.display='none';
+        }
+    };
+    document.body.onclick=function(e){
+        e=e||window.event;
+        var target= e.target || e.srcElement;
+        if(target===inPut){
+            return;
+        }else if(target===bd){
+            search();
+        }else if(target.tagName.toLowerCase()==='li'){
+            inPut.value=target.innerHTML;
+            search();
+        }else{
+            oUl.style.display='none';
+        }
+    }
+    inPut.onkeydown=function(e) {
+        for (var i = 0; i < aLi.length; i++) {
+            aLi[i].className = '';
+        }
+        e = e || window.event;
+        if (e.keyCode === 38) {
+            n--;
+            if (n < -1) {
+                n = aLi.length-1;
+                inPut.value = aLi[n].innerHTML;
+                aLi[n].className = 'on';
+            }
+            change();
+        }else if (e.keyCode === 40) {
+            n++;
+            if (n >= aLi.length) {
+                inPut.value = oldValue;
+                n = -1;
+            }
+            change();
+        }
+        else if (e.keyCode === 13) {
+            search();
+        }
+    }
+    function search(){
+        window.open('https://www.baidu.com/s?wd='+inPut.value,'_self')
+    }
+    function change() {
+        if(!oldValue)
+        {
+            oldValue = inPut.value;
+        }
+        if (n == -1) {
+            inPut.value = oldValue;
+        } else {
+            aLi[n].className = 'on';
+            inPut.value = aLi[n].innerHTML;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>const</title>
+</head>
+<body>
+<div id="box">
+    <div>
+        <label for="userName">用户名</label><input type="text" id="userName"/>
+    </div>
+    <div>
+        <label for="pwd">密码</label><input type="text" id="pwd"/>
+    </div>
+    <button type="button">登陆</button>
+</div>
+<script>
+    //用来声明变量的操作符 一旦声明就不能更改(用来声明一些常量)
+    //声明一些状态码，环境变量 还有一些错误信息 还有一些函数名
+    let userName=document.getElementById('userName');
+    let pwd=document.getElementById('pwd');
+    let btn=document.getElementById('btn');
+    const  configError={
+        userError:'用户名错',
+        pwdError:'密码错',
+    }
+    const  configTrue={
+        successTrue:'好的'
+    }
+    btn.onclick=function(){
+        console.log(1)
+        let userValue=userName.value;
+        let pwdValue=pwd.value;
+        if(userValue!='admin'){
+            return alert(configError.userError)
+        }
+        if(pwdValue!='123456'){
+            return alert(configError.pwdError)
+        }
+        alert(configTrue.successTrue)
+    }
+</script>
+</body>
+</html>

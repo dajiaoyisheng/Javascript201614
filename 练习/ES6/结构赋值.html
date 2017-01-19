@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body,div{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            margin-top: 50px;
+            margin-left: 50px;
+            background-color: #9da;
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+
+</div>
+<script>
+    //结构赋值  按照一定规则
+    var eDiv=document.getElementById('div');
+    function offSet(ele){
+        let l=ele.offsetLeft;
+        let t=ele.offsetTop;
+        let p=ele.offsetParent;
+        while(p){
+            if(window.navigator.userAgent.indexOf('MSIE 8')>-1){
+                l+= p.clientLeft;
+                t+= p.clientTop;
+            }
+            l+= p.offsetLeft;
+            t+= p.offsetTop;
+            p= p.offsetParent;
+        }
+        return {left:l,top:t}
+    }
+    let offSetVal=offSet(eDiv);
+    let {left,top:t}=
+    offSet()
+</script>
+
+</body>
+</html>

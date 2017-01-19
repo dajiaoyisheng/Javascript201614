@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>函数的扩展</title>
+</head>
+<body>
+<script>
+    //传参数时可以设置默认值
+    function add(a=3,b=5){
+     return a+b;
+    }
+    //rest参数 对应的时扩展运算符
+    Math.max.apply(null,[1,2,3,4])
+    Math.max(...[1,2,3,4])
+    function equal(...ary){
+        console.log(ary[0],ary[1]);
+    }
+    equal(...[1,2])//
+
+    //箭头函数
+    //this定义时就确定了this指向父级作用域，不能当作构造函数使用，不能使用arguments对象
+    var selfPush=function(){}
+    var selfPush=(a,b)=>{}
+</script>
+</body>
+</html>

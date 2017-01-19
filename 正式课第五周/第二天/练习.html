@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 400px;
+            height: 100px;
+            margin: 50px auto;
+            position: relative;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+            float: left;
+        }
+        #mark{
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="img/apple_1.jpg" bigsrc="img/apple_1_bigger.jpg" alt=""/>
+    <img src="img/apple_2.jpg" bigsrc="img/apple_2_bigger.jpg" alt=""/>
+    <img src="img/apple_3.jpg" bigsrc="img/apple_3_bigger.jpg" alt=""/>
+    <img src="img/apple_4.jpg" bigsrc="img/apple_4_bigger.jpg" alt=""/>
+    <div id="mark"><img src="img/apple_1_bigger.jpg" alt=""></div>
+</div>
+<script src="jquery-2.0.3.js"></script>
+    <script>
+        var $Box=$('#box');
+        var $mark=$('#mark');
+        var $offset=$Box.offset();
+        $Box.mouseover(function(){
+            $mark.show();
+
+        })
+        $Box.mousemove(function(e){
+            $mark.css({
+                left: e.clientLeft-$offset(),
+                top: e.clientTop-$offset()
+            }).find('img').attr('src',$(e.target).attr('bigSrc'))
+
+        })
+        $Box.mouseout(function(){
+            $mark.hide();
+        })
+
+    </script>
+</body>
+</html>

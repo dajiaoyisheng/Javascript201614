@@ -1,0 +1,28 @@
+1.CSS盒子模型由四部分构成：手动设定的宽高，padding，border，margin
+2.JS盒子模型：可以通过系统提供的方法，来获取元素的样式；
+3.JS盒子模型中系统提供的属性和方法：
+1）client系列：clientWidth  clientHeight clientLeft clientTop;
+2) offset系列：offsetWidth offsetHeight offsetLeft offsetTop offsetParent
+3) scroll系列：scrollWidth scrollHeight scrollLeft scrollTop;
+4.关于父级：
+结构父级 parentNode
+定位父级 offsetParent
+5.逐个解读JS盒子模型的方法：
+1）client系列
+   clientWidth/clientHeight:手动设定的宽度/高度+左右的padding/上下的padding
+   clientLeft/clientTop:左边框的宽度/上边框的宽度
+   跟内容溢出无关；
+2）offset系列：
+    offsetWidth/offsetHeight:clientWidth/clientHeight+左右border/上下border;
+    offsetLeft/offsetTop:当前元素的外边框，到定位父级的内边框之间的距离；
+    跟内容溢出无关；
+3)scroll系列：
+    跟内容溢出有关：
+    当内容没有溢出的情况：
+        scrollHeight:等于clientHeight
+        同理：scrollWidth
+    当内容溢出的情况：
+        约等于上padding+真实内容的高度；
+    约等于：
+    1）当内容溢出时，不同浏览器得到的值不同；
+    2）同一浏览器下，是否设置overflow:hidden得到的值也不同；

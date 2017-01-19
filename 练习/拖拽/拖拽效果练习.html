@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background: lightgreen;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+我们是丐帮的要饭的，都是配角，，，，，，，，
+<div></div>
+<script>
+    var oDiv=document.getElementsByTagName('div')[0];
+    oDiv.onmousedown=down;
+    function down(e){
+        e=e||window.event;
+        this.x= e.clientX;
+        this.y= e.clientY;
+        this.t=this.offsetTop;
+        this.l=this.offsetLeft;
+        if(this.setCapture){
+            this.setCapture();
+            this.onmousemove=move;
+            this.onmouseup=up;
+        }else{
+            var _this=this;
+            document.onmousemove=function(){
+                move.call(_this);
+            };
+            document.onmouseup=function(){
+                up.call(_this);
+            };
+            e.preventDefault();
+        }
+    }
+    function move(e){
+        e=e||window.event;
+        this.style.left= e.clientX-this.x+this.l+'px';
+        this.style.top= e.clientY-this.y+this.t+'px';
+    }
+    function up(){
+        if(this.releaseCapture){
+            this.releaseCapture();
+            this.onmousemove=null;
+            this.onmouseup=null;
+        }else{
+            document.onmousemove=null;
+            document.onmouseup=null;
+        }
+    }
+</script>
+</body>
+</html>

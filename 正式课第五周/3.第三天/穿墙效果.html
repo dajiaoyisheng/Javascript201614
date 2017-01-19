@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background: url("img2/1.jpg") no-repeat center;
+            position: relative;
+            margin: 100px 10px;
+            float: left;
+
+            overflow: hidden;
+        }
+        .box2{background: url("img2/2.jpg")}
+        .box3{background: url("img2/3.jpg")}
+        .box4{background: url("img2/4.jpg")}
+        .box5{background: url("img2/5.jpg")}
+
+        .mark {
+            width: 100%;
+            height: 100%;
+            opacity: .6;
+            background: chartreuse;
+            position: absolute;
+            top: 0px;
+            left: 200px;
+            font-size: 22px;
+            line-height: 200px;
+            text-align: center;
+            /*display: none;*/
+        }
+    </style>
+</head>
+<body>
+<div class="box box1">
+    <div class="mark">呆呆</div>
+</div>
+<div class="box box2">
+    <div class="mark">小丸子</div>
+</div>
+<div class="box box3">
+    <div class="mark">萌萌哒</div>
+</div>
+<div class="box box4">
+    <div class="mark">蒲公英</div>
+</div>
+<div class="box box5">
+    <div class="mark">乔巴</div>
+</div>
+<script src="utils.js"></script>
+<script src="move5.js"></script>
+<script>
+    var obox =utils.getByClass('box')
+    console.log(obox)
+    for(var i=0;i<obox.length;i++){
+        chuanqiang(obox[i])
+    }
+
+    function chuanqiang(obox){
+        var mark = obox.getElementsByTagName('div')[0]
+        //    封装执行判断鼠标从哪个方向进入
+        function hoverDir(e) {
+            var x = obox.offsetWidth / 2 + obox.offsetLeft - e.clientX
+            var y = obox.offsetHeight / 2 + obox.offsetTop - e.clientY
+            return Math.round((Math.atan2(y, x) * 180 / Math.PI + 180) / 90) % 4
+
+            //1.利用公式Math.atan2(y,x) 求出弧度
+            //2.弧度转度的公式：   弧度＝度×π/180=》度=弧度*180/π
+            //3.拿度/90=>bottom:1; left:2; top:3; right:4 / 0
+            //4.把3再%下；
+
+
+        }
+        obox.onmouseover = function (e) {
+//        事件对象的兼容处理
+            e = e || e.event
+//        处理冒泡
+            var oTo= e.relatedTarget|| e.fromElement;
+            if(this.contains(oTo)) return ;
+//        执行判断鼠标从哪个方向进入
+            var aa = hoverDir(e)
+//        '转换'执行判断鼠标从哪个方向进入
+            console.log(aa)
+//        判断鼠标从哪个方向移入，让遮罩层快速到达起始位置
+            switch (aa) {
+                case 0:
+                    utils.css(mark, {left: 200, top: 0})
+                    break;
+                case 1:
+                    utils.css(mark, {left: 00, top: 200})
+                    break;
+                case 3:
+                    utils.css(mark,{left:0,top:-200})
+                    break;
+
+                case 2:
+                    utils.css(mark,{left:-200,top:0})
+                    break;
+
+            }
+            animate({
+                id:mark,
+                target:{
+                    left:0,
+                    top:0
+                },
+                duration:400,
+                effect:3
+            })
+        }
+        obox.onmouseout = function (e) {
+//        事件对象的兼容处理
+            e = e || e.event
+//        处理冒泡
+            var oTo= e.relatedTarget|| e.fromElement;
+            if(this.contains(oTo)) return ;
+//        执行判断鼠标从哪个方向进入
+            var aa = hoverDir(e)
+//        '转换'执行判断鼠标从哪个方向进入
+            console.log(aa)
+//        判断鼠标从哪个方向移入，让遮罩层快速到达起始位置
+            switch (aa) {
+                case 0:
+//                utils.css(mark, {left: 200, top: 0})
+                    animate({
+                        id:mark,
+                        target:{
+                            left:200,
+                            top:0
+                        },
+                        duration:400,
+                        effect:3
+                    })
+                    break;
+                case 1:
+                    animate({
+                        id:mark,
+                        target:{
+                            left:0,
+                            top:200
+                        },
+                        duration:400,
+                        effect:3
+                    })
+                    break;
+                case 3:
+                    animate({
+                        id:mark,
+                        target:{
+                            left:0,
+                            top:-200
+                        },
+                        duration:400,
+                        effect:3
+                    })
+                    break;
+
+                case 2:
+                    animate({
+                        id:mark,
+                        target:{
+                            left:-200,
+                            top:0
+                        },
+                        duration:400,
+                        effect:3
+                    })
+                    break;
+
+            }
+
+        }
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body,ul,li,div{
+            margin: 0;
+            padding: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        .tab{}
+        .tab .tab-title{
+            height: 40px;
+        }
+        .tab .tab-title li{
+            float: left;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: aquamarine;
+        }
+        .tab .tab-title li.change{
+            background-color: darkgreen;
+        }
+        .tab .tab-con div{
+            display: none;
+            width: 30px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+        .tab .tab-con div.show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="box" class="tab">
+    <ul class="tab-title">
+        <li class="change">标题1</li>
+        <li>标题2</li>
+        <li>标题3</li>
+    </ul>
+    <div class="tab-con">
+        <div class="show">内容1</div>
+        <div>内容2</div>
+        <div>内容3</div>
+    </div>
+</div>
+<script>
+    //声明变量的操作符，和var的用法基本一样
+    //let 不存在变量提升（不进行预解释），在同一个作用域不能重复声明
+   // var name='zhufeng';
+   // let age=18;
+    //const //常量 圆周率一经声明不会更改
+    let box=document.getElementById('box');
+    let oLi=box.getElementsByTagName('li');
+    let oDiv=box.getElementsByClassName('tab-con')[0].getElementsByTagName('div');
+    let len=oLi.length;
+    for (let i = 0; i < len; i++) {
+       // oLi[i].index=i;
+        oLi[i].onclick=function(){
+            for (let j = 0; j < len; j++) {
+                oLi[j].className='';
+                oDiv[j].className='';
+            }
+            oLi[i].className='change';
+            oDiv[i].className='change';
+        }
+    }
+    //ES6新增作用域
+    // {}
+</script>
+</body>
+</html>
